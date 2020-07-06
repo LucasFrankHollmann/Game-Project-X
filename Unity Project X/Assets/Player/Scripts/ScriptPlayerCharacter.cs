@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ScriptPlayerCharacter : MonoBehaviour
 {
+    [SerializeField] private GameObject InteractionCheck;
+    [SerializeField] private LayerMask whatIsInteractable;
+    private float InteractionCheckRadius = 0.2f;
+    private float InteractCoolDown = 0.5f, InteractCD = 0.5f;
     public GameObject gameController;
     Rigidbody2D body;
     int faceDirection = 7; //direcao que o personagem esta virado. P = personagem: 
@@ -25,6 +29,11 @@ public class ScriptPlayerCharacter : MonoBehaviour
     public float runSpeed; //px por segund
     float dodgeCooldown = 0f; //dodge Cooldown in seconds
     float dodgeDuration = 0f; //dodgeDuration in seconds
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(InteractionCheck.transform.position, InteractionCheckRadius);
+    }
 
     void Start (){
         body = GetComponent<Rigidbody2D>();
@@ -54,6 +63,19 @@ public class ScriptPlayerCharacter : MonoBehaviour
             }
         }
         faceDirection = UpdateFaceDirection();
+
+        if(Input.GetKey(KeyCode.F) && InteractCD <= 0){
+            Collider2D[] ScElList = Physics2D.OverlapCircleAll(InteractionCheck.transform.position, InteractionCheckRadius , whatIsInteractable);
+            if(ScElList.Length != 0){
+                GameObject ScEl = ScElList[0].gameObject;
+                ScEl.GetComponent<ScenarioElement>().onInteraction();
+            }
+
+            InteractCD = InteractCoolDown;
+        }
+        else if(InteractCD > 0){
+            InteractCD -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate(){
@@ -81,34 +103,42 @@ public class ScriptPlayerCharacter : MonoBehaviour
         if(angle>=-22.5f && angle<22.5f){
             faceDirection = 5; // Direita
             this.GetComponent<SpriteRenderer>().sprite = spriteRight; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x+ 0.6f, transform.position.y, 0);
         }
         else if(angle>=22.5f && angle<67.5f){
             faceDirection = 8; // Baixo-Direita
             this.GetComponent<SpriteRenderer>().sprite = spriteDownRight; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x+0.42f, transform.position.y-0.42f, 0);
         }
         else if(angle>=67.5f && angle<112.5f){
             faceDirection = 7; // Baixo
             this.GetComponent<SpriteRenderer>().sprite = spriteDown;
+            InteractionCheck.transform.position = new Vector3(transform.position.x, transform.position.y-0.6f, 0);
         }
         else if(angle>=112.5f && angle<157.5f){
             this.GetComponent<SpriteRenderer>().sprite = spriteDownLeft; 
             faceDirection = 6; // Baixo-Esquerda
+            InteractionCheck.transform.position = new Vector3(transform.position.x-0.42f, transform.position.y-0.42f, 0);
         }
         else if(angle>=157.5f || angle<-157.5f){
             faceDirection = 4; // Esquerda
             this.GetComponent<SpriteRenderer>().sprite = spriteLeft; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x-0.6f, transform.position.y, 0);
         }
         else if(angle>=-67.5f && angle<-22.5f){
             faceDirection = 3; // Topo-Direita
             this.GetComponent<SpriteRenderer>().sprite = spriteTopRight; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x+0.42f, transform.position.y+0.42f, 0);
         }
         else if(angle>=-112.5f && angle<-67.5f){
             faceDirection = 2; // Topo
             this.GetComponent<SpriteRenderer>().sprite = spriteTop; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x, transform.position.y+0.6f, 0);
         }
         else if(angle>=-157.5f && angle<-112.5f){
             faceDirection = 1; // Topo-Esquerda
             this.GetComponent<SpriteRenderer>().sprite = spriteTopLeft; 
+            InteractionCheck.transform.position = new Vector3(transform.position.x-0.42f, transform.position.y+0.42f, 0);
         }
         return faceDirection;
     }
