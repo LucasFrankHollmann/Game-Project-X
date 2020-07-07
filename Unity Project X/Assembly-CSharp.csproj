@@ -36,8 +36,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ScriptGameController.cs" />
-     <Compile Include="Assets\Scripts\ScriptPlayerCharacter.cs" />
+     <Compile Include="Assets\Enemies\Scripts\scriptEnemyBase.cs" />
+     <Compile Include="Assets\Player\Scripts\ScriptGameController.cs" />
+     <Compile Include="Assets\Player\Scripts\ScriptPlayerCharacter.cs" />
+     <Compile Include="Assets\Scenario\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scenario\Scripts\ChunkController.cs" />
+     <Compile Include="Assets\Scenario\Scripts\ElementoTesteController.cs" />
+     <Compile Include="Assets\Scenario\Scripts\ScenarioElement.cs" />
+     <Compile Include="Assets\Scenario\Scripts\ScenarioElementController.cs" />
+     <Compile Include="Assets\Scenario\Scripts\scriptForestController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
