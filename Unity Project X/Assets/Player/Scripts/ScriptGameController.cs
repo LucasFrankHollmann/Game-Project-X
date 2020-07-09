@@ -6,11 +6,6 @@ using UnityEngine;
 public class ScriptGameController : MonoBehaviour
 {
 	static ScriptGameController instance;
-	public enum enumAreaChunks{
-		Home=0,
-		Forest=1,
-		Mountain=2
-	}
 	
 	public enum enumGameState {
 		Paused=0,
@@ -19,11 +14,11 @@ public class ScriptGameController : MonoBehaviour
 	}
 
 	enumGameState gameState;
-	enumAreaChunks currentAreaChunk;
+	enumGameState lastState;
+	
 	int currentDay;
 	
 	void Awake(){
-		currentAreaChunk = enumAreaChunks.Forest;
 		currentDay = 5;
 		if(instance != null){
 			Destroy(gameObject);
@@ -33,35 +28,43 @@ public class ScriptGameController : MonoBehaviour
 			instance = this;
 			DontDestroyOnLoad(gameObject);
 			this.gameState = enumGameState.UnpausedTimeStopped;
+			this.lastState = enumGameState.UnpausedTimeStopped;
 		}
 	}
 
-	public void setGameState(int newState){
-		try{
-			this.gameState = (enumGameState) newState;
+	public void pauseGameStateTrigger(){
+		if(gameState == enumGameState.Paused){
+			gameState = lastState;
+			Time.timeScale = 1f;
 		}
-		catch (System.Exception){
-			this.gameState = enumGameState.Paused;
-			print("Wrong GameState Value passed, gameState set to Paused");
+		else{
+			Time.timeScale = 0f;
+			lastState = gameState;
+			gameState = enumGameState.Paused;
 		}
 	}
+
+	public void timerGameStateTrigger(){
+		if(gameState == enumGameState.Paused){
+			if(lastState == enumGameState.UnpausedTimeStopped){
+				lastState = enumGameState.UnpausedTimeRunning;
+			}
+			else{
+				lastState = enumGameState.UnpausedTimeStopped;
+			}
+		}
+		else{
+			if(gameState == enumGameState.UnpausedTimeStopped){
+				gameState = enumGameState.UnpausedTimeRunning;
+			}
+			else{
+				gameState = enumGameState.UnpausedTimeStopped;
+			}
+		}
+	}
+
 	public int getGameState(){
 		return (int)this.gameState;
-	}
-
-	//começa a mudar de cena/mapa
-	public void changeAreaChunk(int nextScene){
-		switch((int)nextScene){
-			case 0: //Home
-
-			break;
-			case 1: //Forest
-				currentAreaChunk = enumAreaChunks.Forest;
-			break;
-			case 2: //Mountain
-
-			break;
-		}
 	}
 
 	public int getDay(){

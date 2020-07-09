@@ -46,6 +46,7 @@
      <Compile Include="Assets\Scenario\Scripts\ScenarioElementController.cs" />
      <Compile Include="Assets\Scenario\Scripts\scriptForestController.cs" />
      <Compile Include="Assets\Scenario\Scripts\scriptMovePoint.cs" />
+     <Compile Include="Assets\UI\Scripts\scriptPauseMenu.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

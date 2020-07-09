@@ -20,14 +20,6 @@ public class ScriptPlayerCharacter : MonoBehaviour
     // 1 2 3
     // 4 P 5
     // 6 7 8
-    public Sprite spriteTop;
-    public Sprite spriteTopLeft;
-    public Sprite spriteTopRight;
-    public Sprite spriteLeft;
-    public Sprite spriteRight;
-    public Sprite spriteDown;
-    public Sprite spriteDownLeft;
-    public Sprite spriteDownRight;
 
     float horizontal; //input horizontal
     float vertical; //input vertical
@@ -49,33 +41,35 @@ public class ScriptPlayerCharacter : MonoBehaviour
     }
 
     void Update(){
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 = pra esquerda
-        vertical = Input.GetAxisRaw("Vertical"); // -1 = pra baixo 
-        if(Input.GetKey(KeyCode.LeftShift)){ // Checa botao de corrida
-            RunMove();
-        }
+        if(gameController.GetComponent<ScriptGameController>().getGameState() != 0){
+            horizontal = Input.GetAxisRaw("Horizontal"); // -1 = pra esquerda
+            vertical = Input.GetAxisRaw("Vertical"); // -1 = pra baixo 
+            if(Input.GetKey(KeyCode.LeftShift)){ // Checa botao de corrida
+                RunMove();
+            }
 
-        if(dodgeCooldown>0){
-            dodgeCooldown -= Time.deltaTime;
-        }
-        if( ((horizontal != 0 || vertical != 0) && Input.GetKeyDown(KeyCode.Space) && dodgeCooldown<=0) || dodgeDuration>0){ //Esquiva.
-            DodgeMove();
-        }
+            if(dodgeCooldown>0){
+                dodgeCooldown -= Time.deltaTime;
+            }
+            if( ((horizontal != 0 || vertical != 0) && Input.GetKeyDown(KeyCode.Space) && dodgeCooldown<=0) || dodgeDuration>0){ //Esquiva.
+                DodgeMove();
+            }
 
-        if(attackCooldown>0){
-            attackCooldown -= Time.deltaTime;
-        }
-        if(Input.GetMouseButtonDown(0) && attackCooldown <=0){
-            AttackPrimary();
-        }
+            if(attackCooldown>0){
+                attackCooldown -= Time.deltaTime;
+            }
+            if(Input.GetMouseButtonDown(0) && attackCooldown <=0){
+                AttackPrimary();
+            }
 
-        faceDirection = UpdateFaceDirection();
+            faceDirection = UpdateFaceDirection();
 
-        if(Input.GetKey(KeyCode.F) && interactCooldown <= 0){
-            Interact();
-        }
-        else if(interactCooldown > 0){
-            interactCooldown -= Time.deltaTime;
+            if(Input.GetKey(KeyCode.F) && interactCooldown <= 0){
+                Interact();
+            }
+            else if(interactCooldown > 0){
+                interactCooldown -= Time.deltaTime;
+            }
         }
     }
 
