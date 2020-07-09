@@ -8,6 +8,8 @@ public class scriptForestController : MonoBehaviour
     public GameObject gameController; 
     public GameObject forestController;
     [SerializeField] BoxCollider2D boundBox;
+    public GameObject playerCharacter;
+    public GameObject movePoint;
     public List<GameObject> resourceSpawnables; //recursos que PODEM ser spawnados no mapa
     public List<GameObject> enemiesSpawnables; //inimigos que PODEM ser spawnados no mapa
 
@@ -17,6 +19,11 @@ public class scriptForestController : MonoBehaviour
     Vector3 maxBounds;
     Vector3 minBounds;
 
+    void Awake(){
+        gameController = GameObject.FindWithTag("GameController");
+        Instantiate(playerCharacter);
+        Instantiate(movePoint, playerCharacter.transform.position + new Vector3(5f,0f,0f), new Quaternion());
+    }
     void Start(){
         minBounds = boundBox.bounds.min;
         maxBounds = boundBox.bounds.max;

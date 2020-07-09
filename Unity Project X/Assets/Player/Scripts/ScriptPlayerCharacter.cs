@@ -44,6 +44,8 @@ public class ScriptPlayerCharacter : MonoBehaviour
 
     void Start (){
         body = GetComponent<Rigidbody2D>();
+        gameController =  GameObject.FindWithTag("GameController");
+        GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().player = GameObject.FindWithTag("Player");
     }
 
     void Update(){
@@ -112,7 +114,9 @@ public class ScriptPlayerCharacter : MonoBehaviour
         Collider2D[] ScElList = Physics2D.OverlapCircleAll(interactionCheck.transform.position, interactionCheckRadius , whatIsInteractable);
         if(ScElList.Length != 0){
             GameObject ScEl = ScElList[0].gameObject;
-            ScEl.GetComponent<ScenarioElement>().onInteraction();
+            if(ScEl.tag.Equals("InteractableElement")){
+                ScEl.GetComponent<ScenarioElement>().onInteraction();
+            }
         }
         interactCooldown = interactRate;
     }
