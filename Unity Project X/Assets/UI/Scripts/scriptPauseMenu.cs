@@ -19,6 +19,7 @@ public class scriptPauseMenu : MonoBehaviour
             }
             else{
                 PauseGame();
+                this.GetComponent<scriptInventoryWindow>().closeInventory();
             }
         }
     }
