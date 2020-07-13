@@ -111,6 +111,9 @@ public class ScriptPlayerCharacter : MonoBehaviour
             if(ScEl.tag.Equals("InteractableElement")){
                 ScEl.GetComponent<ScenarioElement>().onInteraction();
             }
+            else if(ScEl.tag.Equals("Item")){
+                ScEl.GetComponent<scriptItemClass>().onInteraction();
+            }
         }
         interactCooldown = interactRate;
     }

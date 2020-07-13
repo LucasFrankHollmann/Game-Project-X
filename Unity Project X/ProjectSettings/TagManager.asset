@@ -8,6 +8,7 @@ TagManager:
   - ScenarioElement
   - Enemy
   - InteractableElement
+  - Item
   layers:
   - Default
   - TransparentFX

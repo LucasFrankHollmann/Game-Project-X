@@ -31,7 +31,6 @@ public class scriptEnemyBase : MonoBehaviour
     }
 
     enumAwareness currentAwareness;
-    float moveLimiter = 0.7f; //ver FixedUpdate para explicacao
     public float runSpeed; //px por segund
     Rigidbody2D body;
     // Start is called before the first frame update

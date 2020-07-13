@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0d359b0cf00b85946b95b5540268bf73
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - iconOnInventory: {fileID: 21300000, guid: 5207fd962f0b76f4b88b6c2a034036f2, type: 3}
+  - spriteOnGround: {fileID: 21300000, guid: 5207fd962f0b76f4b88b6c2a034036f2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

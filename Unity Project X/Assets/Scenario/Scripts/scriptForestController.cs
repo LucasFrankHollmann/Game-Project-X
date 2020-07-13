@@ -36,13 +36,13 @@ public class scriptForestController : MonoBehaviour
             enemy.GetComponent<scriptEnemyBase>().gameController = gameController;
             enemy.GetComponent<scriptEnemyBase>().forestController = forestController;
             enemy.name= "enemy"+i;
-            //enemiesOnMap.AddFirst(enemy);
         }
         int numberOfSpawnablesToSpawn = 40;
         for(int i=0; i< numberOfSpawnablesToSpawn; i++){
             int chosen = Random.Range(0,resourceSpawnables.Count-1);
             Vector2 position = new Vector2(Random.Range(minBounds.x, maxBounds.x), Random.Range(minBounds.y, maxBounds.y));
-            Instantiate(resourceSpawnables[chosen], position, Quaternion.identity, forestController.transform);
+            GameObject resourceNode = Instantiate(resourceSpawnables[chosen], position, Quaternion.identity, forestController.transform);
+            resourceNode.GetComponent<ScenarioElement>().self = resourceNode;
         }
     }
     

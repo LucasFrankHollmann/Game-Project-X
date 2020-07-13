@@ -37,13 +37,15 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Enemies\Scripts\scriptEnemyBase.cs" />
+     <Compile Include="Assets\Objects\Items\Scripts\scriptItemClass.cs" />
+     <Compile Include="Assets\Objects\Items\Scripts\scriptWoodResource.cs" />
      <Compile Include="Assets\Player\Scripts\ScriptGameController.cs" />
      <Compile Include="Assets\Player\Scripts\ScriptPlayerCharacter.cs" />
      <Compile Include="Assets\Scenario\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scenario\Scripts\ChunkController.cs" />
-     <Compile Include="Assets\Scenario\Scripts\ElementoTesteController.cs" />
      <Compile Include="Assets\Scenario\Scripts\ScenarioElement.cs" />
      <Compile Include="Assets\Scenario\Scripts\ScenarioElementController.cs" />
+     <Compile Include="Assets\Scenario\Scripts\ScenarioElementTree.cs" />
      <Compile Include="Assets\Scenario\Scripts\scriptForestController.cs" />
      <Compile Include="Assets\Scenario\Scripts\scriptMovePoint.cs" />
      <Compile Include="Assets\UI\Scripts\scriptInventoryWindow.cs" />
